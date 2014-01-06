@@ -94,7 +94,7 @@ def main():
         address = args['ipaddr']
     
     try:
-        network = ipaddr.ip_interface(address)
+        network = ipaddr.IPNetwork(address)
     except:
         parser.error('Invalid address: {}'.format(address))
     
@@ -107,12 +107,12 @@ def main():
            'Net:   {4}\n'
            'Mask:  {5}\n'
            'Last:  {6}\n').format(network.numhosts,
-                                  network.network_address.exploded,
-                                  network.broadcast_address.exploded,
+                                  network.network.exploded,
+                                  network.broadcast.exploded,
                                   network.netmask.exploded,
-                                  to_bin(network.network_address.exploded),
+                                  to_bin(network.network.exploded),
                                   to_bin(network.netmask.exploded),
-                                  to_bin(network.broadcast_address.exploded))
+                                  to_bin(network.broadcast.exploded))
 
 if __name__ == '__main__':
     main()
