@@ -1,10 +1,10 @@
 # Universal (IPv4/IPv6) CIDR calculator
 
+
 ## Licensing:
 
 Licensed under ISC license:
 
-    :::text
 	Copyright (c) 2013 Andre Sencioles Vitorio Oliveira <andre@bcp.net.br>
 	
 	Permission to use, copy, modify, and distribute this software for any
