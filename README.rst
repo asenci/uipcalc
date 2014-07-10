@@ -3,9 +3,9 @@ uipcalc
 
 Universal (IPv4/IPv6) CIDR calculator
 
-Source available at: `bitbucket.org/asenci/uipcalc/ <http://bitbucket.org/asenci/uipcalc/>`_
+Source available at: http://bitbucket.org/asenci/uipcalc/
 
-Please report any issues at: `bitbucket.org/asenci/uipcalc/issues/ <http://bitbucket.org/asenci/uipcalc/issues/>`_
+Please report any issues at: http://bitbucket.org/asenci/uipcalc/issues/
 
 
 Installing:
