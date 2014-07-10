@@ -29,7 +29,7 @@ __title__ = 'uipcalc'
 __summary__ = 'Universal (IPv4/IPv6) IP address and netmask calculator'
 __url__ = 'http://bitbucket.org/asenci/uipcalc'
 
-__version__ = '0.2'
+__version__ = '0.2.1'
 
 __author__ = 'Andre Sencioles Vitorio Oliveira'
 __email__ = 'andre@bcp.net.br'
@@ -82,15 +82,15 @@ def main():
     except ValueError:
         return parser.error('Invalid address: {0}'.format(args.address))
     
-    print('Network:    {0}'.format(network.network.exploded))
-    print('Netmask:    {0}'.format(network.netmask.exploded))
-    print('Broadcast:  {0}'.format(network.broadcast.exploded))
-    print()
     print('Number of addresses:  {0}'.format(network.numhosts))
     print()
-    print('Net:   {0}'.format(address_to_bin(network.network)))
-    print('Mask:  {0}'.format(address_to_bin(network.netmask)))
-    print('Last:  {0}'.format(address_to_bin(network.broadcast)))
+    print('Network:    {0}'.format(network.network.exploded))
+    print('Broadcast:  {0}'.format(network.broadcast.exploded))
+    print('Netmask:    {0}'.format(network.netmask.exploded))
+    print()
+    print('Network:    {0}'.format(address_to_bin(network.network)))
+    print('Broadcast:  {0}'.format(address_to_bin(network.broadcast)))
+    print('Netmask:    {0}'.format(address_to_bin(network.netmask)))
     print()
 
 
