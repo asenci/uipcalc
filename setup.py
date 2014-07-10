@@ -8,6 +8,14 @@ from setuptools import setup
 import uipcalc
 
 
+install_requires = [
+    'ipaddr>=2.1',
+]
+
+if sys.version_info[:2] < (2, 7):
+    install_requires.append('argparse')
+
+
 setup(
     name=uipcalc.__title__,
     description=uipcalc.__summary__,
@@ -40,5 +48,5 @@ setup(
     entry_points={'console_scripts': ['uipcalc = uipcalc:main']},
     test_suite='test_uipcalc',
 
-    install_requires='argparse' if sys.version_info[:2] < (2, 7) else None,
+    install_requires=install_requires
 )
