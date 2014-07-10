@@ -3,6 +3,18 @@ uipcalc
 
 Universal (IPv4/IPv6) CIDR calculator
 
+Source available at: `bitbucket.org/asenci/uipcalc/ <http://bitbucket.org/asenci/uipcalc/>`_
+
+Please report any issues at: `bitbucket.org/asenci/uipcalc/issues/ <http://bitbucket.org/asenci/uipcalc/issues/>`_
+
+
+Installing:
+-----------
+
+::
+
+    $ pip install uipcalc
+
 
 Usage:
 ------
@@ -24,7 +36,7 @@ Usage:
 Examples:
 ---------
 
-.. sourcecode::
+::
 
     $ uipcalc 192.0.2.4/12
     Network:    192.0.0.0
@@ -71,22 +83,17 @@ Examples:
     Last:  0010000000000001.0000110110111000.0000000000000000.0000000000001111.1111111111111111.1111111111111111.1111111111111111.1111111111111111
 
 
-Licensing:
-----------
+Requirements:
+-------------
 
-Licensed under ISC license:
+- Python >= 2.6 (Python 3 not yet supported)
+- argparse (for Python 2.6)
+- ipaddr >= 2.1
 
-    Copyright (c) 2011 Andre Sencioles Vitorio Oliveira <andre@bcp.net.br>
 
-    Permission to use, copy, modify, and distribute this software for any
-    purpose with or without fee is hereby granted, provided that the above
-    copyright notice and this permission notice appear in all copies.
+License:
+--------
 
-    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-    WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-    MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-    ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-    WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-    ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
-    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+Licensed under ISC license.
 
+See `LICENSE <http://bitbucket.org/asenci/uipcalc/raw/master/LICENSE>`_ file for details.

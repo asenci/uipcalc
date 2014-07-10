@@ -17,6 +17,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 """
 
 from __future__ import print_function
+
+# TODO: add support for Python3
 import ipaddr
 
 # noinspection PyCompatibility

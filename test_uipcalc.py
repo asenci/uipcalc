@@ -71,14 +71,16 @@ addresses = [
 ]
 
 
-def test_address_to_bin(address, repr_addr, repr_mask):
+# noinspection PyDocstring
+def test_address_to_bin(a, ra, rm):
+    # noinspection PyDocstring
     def test(self):
-        net = ipaddr.IPNetwork(address)
+        net = ipaddr.IPNetwork(a)
         addr = net.ip
         mask = net.netmask
 
-        self.assertEqual(repr_addr, uipcalc.address_to_bin(addr))
-        self.assertEqual(repr_mask, uipcalc.address_to_bin(mask))
+        self.assertEqual(ra, uipcalc.address_to_bin(addr))
+        self.assertEqual(rm, uipcalc.address_to_bin(mask))
 
     return test
 
