@@ -1,13 +1,43 @@
-from distutils.core import setup
+"""
+Setup script for uipcalc
+"""
+
+import sys
+from setuptools import setup
+
+import uipcalc
+
 
 setup(
-    name='uipcalc',
-    version='0.1',
-    scripts=['uipcalc.py'],
-    url='https://bitbucket.org/asenci/uipcalc',
-    license='ISC License',
-    author='Andre Sencioles Vitorio Oliveira',
-    author_email='andre@bcp.net.br',
-    description='Universal (IPv4/IPv6) CIDR calculator',
-    requires=['ipaddr'],
+    name=uipcalc.__title__,
+    description=uipcalc.__summary__,
+    long_description=open('README.rst').read(),
+    url=uipcalc.__url__,
+
+    author=uipcalc.__author__,
+    author_email=uipcalc.__email__,
+    license=uipcalc.__license__,
+
+    version=uipcalc.__version__,
+
+    platforms='any',
+    keywords=['ip', 'ipv4', 'ipv6', 'calculator'],
+    classifiers=[
+        'Natural Language :: English',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: POSIX',
+        'Operating System :: POSIX :: BSD',
+        'Operating System :: POSIX :: Linux',
+        'Operating System :: Microsoft :: Windows',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: Implementation :: CPython',
+    ],
+
+    entry_points={'console_scripts': ['uipcalc = uipcalc:main']},
+    test_suite='test_uipcalc',
+
+    install_requires='argparse' if sys.version_info[:2] < (2, 7) else None,
 )
