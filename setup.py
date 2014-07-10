@@ -45,6 +45,7 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython',
     ],
 
+    py_modules=['uipcalc'],
     entry_points={'console_scripts': ['uipcalc = uipcalc:main']},
     test_suite='test_uipcalc',
 
