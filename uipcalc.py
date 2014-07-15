@@ -23,11 +23,12 @@ import ipaddr
 
 # noinspection PyCompatibility
 import argparse
+import sys
 
 
 __title__ = 'uipcalc'
 __summary__ = 'Universal (IPv4/IPv6) IP address and netmask calculator'
-__url__ = 'http://bitbucket.org/asenci/uipcalc'
+__url__ = 'http://bitbucket.org/asenci/uipcalc/'
 
 __version__ = '0.2.1'
 
@@ -58,14 +59,14 @@ def address_to_bin(address):
 
 
 # noinspection PyDocstring
-def main():
+def main(argv=None):
 
     parser = argparse.ArgumentParser(description=__summary__)
     parser.add_argument(
         'address', help='IP address with optional netmask in CIDR notation')
     parser.add_argument(
         'netmask', nargs='?', help='Netmask in dotted-decimal notation')
-    args = parser.parse_args()
+    args = parser.parse_args(args=argv)
 
     if args.netmask:
 
@@ -95,4 +96,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
