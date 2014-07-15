@@ -3,7 +3,7 @@ uipcalc test cases
 """
 
 import ipaddr
-from unittest import TestCase
+import unittest
 
 import uipcalc
 
@@ -79,15 +79,19 @@ def test_address_to_bin(a, ra, rm):
         addr = net.ip
         mask = net.netmask
 
-        self.assertEqual(ra, uipcalc.address_to_bin(addr))
-        self.assertEqual(rm, uipcalc.address_to_bin(mask))
+        self.assertEqual(uipcalc.address_to_bin(addr), ra)
+        self.assertEqual(uipcalc.address_to_bin(mask), rm)
 
     return test
 
 
-class TestUIPCALC(TestCase):
+class TestUIPCALC(unittest.TestCase):
     pass
 
 for num, (address, repr_addr, repr_mask) in enumerate(addresses):
-    setattr(TestUIPCALC, 'test_{0}'.format(num),
+    setattr(TestUIPCALC, 'test_address_to_bin_{0}'.format(num),
             test_address_to_bin(address, repr_addr, repr_mask))
+
+
+if __name__ == '__main__':
+    unittest.main()
