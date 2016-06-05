@@ -5,28 +5,28 @@ Setup script for uipcalc
 import sys
 from setuptools import setup
 
-import uipcalc
 
-
-install_requires = [
-    'ipaddr>=2.1',
-]
+install_requires = ['six']
+test_requirements = ['nose', 'tox']
 
 if sys.version_info[:2] < (2, 7):
     install_requires.append('argparse')
 
+if sys.version_info[:2] < (3, 3):
+    install_requires.append('ipaddress')
+
 
 setup(
-    name=uipcalc.__title__,
-    description=uipcalc.__summary__,
+    name='uipcalc',
+    description='Universal (IPv4/IPv6) IP address and netmask calculator',
     long_description=open('README.rst').read(),
-    url=uipcalc.__url__,
+    url='http://bitbucket.org/asenci/uipcalc/',
 
-    author=uipcalc.__author__,
-    author_email=uipcalc.__email__,
-    license=uipcalc.__license__,
+    author='Andre Sencioles Vitorio Oliveira',
+    author_email='asenci@gmail.com',
+    license='ISC License',
 
-    version=uipcalc.__version__,
+    version='0.3',
 
     platforms='any',
     keywords=['ip', 'ipv4', 'ipv6', 'calculator'],
@@ -40,8 +40,9 @@ setup(
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
 
@@ -49,5 +50,6 @@ setup(
     entry_points={'console_scripts': ['uipcalc = uipcalc:main']},
     test_suite='test_uipcalc',
 
-    install_requires=install_requires
+    install_requires=install_requires,
+    test_requirements=test_requirements,
 )

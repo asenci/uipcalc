@@ -1,7 +1,7 @@
 """
 uipcalc - Universal (IPv4/IPv6) IP address and netmask calculator
 
-Copyright (c) 2011 Andre Sencioles Vitorio Oliveira <andre@bcp.net.br>
+Copyright (c) 2011 Andre Sencioles Vitorio Oliveira <asenci@gmail.com>
 
 Permission to use, copy, modify, and distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -17,81 +17,74 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 """
 
 from __future__ import print_function
-
-# TODO: add support for Python3
-import ipaddr
-
-# noinspection PyCompatibility
 import argparse
+import ipaddress
+import six
 import sys
 
 
-__title__ = 'uipcalc'
-__summary__ = 'Universal (IPv4/IPv6) IP address and netmask calculator'
-__url__ = 'http://bitbucket.org/asenci/uipcalc/'
-
-__version__ = '0.2.1'
-
-__author__ = 'Andre Sencioles Vitorio Oliveira'
-__email__ = 'andre@bcp.net.br'
-
-__license__ = 'ISC License'
-
-
-def address_to_bin(address):
+def address_to_bin(address, split=None):
     """Converts an dotted-decimal (IPv4) or groups of hexadecimals (IPv6)
     formatted address to a binary representation
 
-    :param _BaseIP address: The IP address
+    :param address: The IP address
+    :type address: ipaddress.IPv4Address or ipaddress.IPv6Address or str
+    :param int split: Position to split the address
     :return: A binary representation of the IP address
     :rtype: str
     """
 
-    # IPv4
-    if address.version == 4:
-        return '.'.join([bin(int(x))[2:].zfill(8)
-                         for x in address.exploded.split('.')])
+    if isinstance(address, six.string_types):
+        address = ipaddress.ip_address(address)
 
-    # IPv6
+    if address.version == 4:
+        bits_total = 32
+        bits_step = 8
+        bits_sep = '.'
     else:
-        return '.'.join([bin(int(x, 16))[2:].zfill(16)
-                         for x in address.exploded.split(':')])
+        bits_total = 128
+        bits_step = 16
+        bits_sep = ':'
+
+    bits_array = bin(int(address))[2:]
+    bits_array = bits_array.zfill(bits_total)
+    bits_array = [bits_array[p:p + bits_step] for p in
+                  range(0, bits_total, bits_step)]
+    bits_array = bits_sep.join(bits_array)
+
+    if split:
+        split += split // bits_step
+        bits_array = bits_array[:split] + ' ' + bits_array[split:]
+
+    return bits_array
 
 
 # noinspection PyDocstring
 def main(argv=None):
 
-    parser = argparse.ArgumentParser(description=__summary__)
+    parser = argparse.ArgumentParser(
+        description='Universal (IPv4/IPv6) IP address and netmask calculator')
     parser.add_argument(
-        'address', help='IP address with optional netmask in CIDR notation')
-    parser.add_argument(
-        'netmask', nargs='?', help='Netmask in dotted-decimal notation')
+        'address', help='IP address with netmask in CIDR or dotted-decimal notation')
     args = parser.parse_args(args=argv)
 
-    if args.netmask:
-
-        if '/' in args.address:
-            return parser.error(
-                'The netmask must be specified either in CIDR or doted-quad'
-                ' notation.')
-
-        args.address += '/' + args.netmask
-
     try:
-        network = ipaddr.IPNetwork(args.address)
+        interface = ipaddress.ip_interface(args.address)
 
-    except ValueError:
-        return parser.error('Invalid address: {0}'.format(args.address))
+    except ValueError as e:
+        return parser.error(str(e))
+
+    net = interface.network
     
-    print('Number of addresses:  {0}'.format(network.numhosts))
+    print('Number of addresses:  {0}'.format(net.num_addresses))
     print()
-    print('Network:    {0}'.format(network.network.exploded))
-    print('Broadcast:  {0}'.format(network.broadcast.exploded))
-    print('Netmask:    {0}'.format(network.netmask.exploded))
+    print('Network:    {0}'.format(net.network_address.exploded))
+    print('Broadcast:  {0}'.format(net.broadcast_address.exploded))
+    print('Netmask:    {0} ({1})'.format(net.netmask.exploded, net.prefixlen))
     print()
-    print('Network:    {0}'.format(address_to_bin(network.network)))
-    print('Broadcast:  {0}'.format(address_to_bin(network.broadcast)))
-    print('Netmask:    {0}'.format(address_to_bin(network.netmask)))
+    print('Network:    {0}'.format(address_to_bin(net.network_address, net.prefixlen)))
+    print('Broadcast:  {0}'.format(address_to_bin(net.broadcast_address, net.prefixlen)))
+    print('Netmask:    {0}'.format(address_to_bin(net.netmask, net.prefixlen)))
     print()
 
 
