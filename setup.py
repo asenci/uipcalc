@@ -20,7 +20,7 @@ setup(
     version='0.3.1',
     author='Andre Sencioles',
     author_email='asenci@gmail.com',
-    license='ISC License',
+    license=open('LICENSE').read(),
     url='https://bitbucket.org/asenci/uipcalc/',
     download_url='https://pypi.python.org/pypi/uipcalc',
 
@@ -44,7 +44,7 @@ setup(
         'Topic :: Utilities',
     ],
 
-    packages=find_packages(exclude=['tests']),
+    packages=find_packages(),
     entry_points={
         'console_scripts': [
             'uipcalc = uipcalc:main',
