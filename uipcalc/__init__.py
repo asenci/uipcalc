@@ -16,7 +16,6 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 """
 
-from __future__ import print_function
 import argparse
 import ipaddress
 import six
@@ -75,7 +74,7 @@ def main(argv=None):
         return parser.error(str(e))
 
     net = interface.network
-    
+
     print('Number of addresses:  {0}'.format(net.num_addresses))
     print()
     print('Network:    {0}'.format(net.network_address.exploded))

@@ -7,10 +7,7 @@ from setuptools import setup
 
 
 install_requires = ['six']
-test_requirements = ['nose', 'tox']
-
-if sys.version_info[:2] < (2, 7):
-    install_requires.append('argparse')
+tests_require = ['nose', 'tox']
 
 if sys.version_info[:2] < (3, 3):
     install_requires.append('ipaddress')
@@ -20,7 +17,8 @@ setup(
     name='uipcalc',
     description='Universal (IPv4/IPv6) IP address and netmask calculator',
     long_description=open('README.rst').read(),
-    url='http://bitbucket.org/asenci/uipcalc/',
+    url='https://bitbucket.org/asenci/uipcalc/',
+    download_url='https://pypi.python.org/pypi/uipcalc',
 
     author='Andre Sencioles Vitorio Oliveira',
     author_email='asenci@gmail.com',
@@ -46,10 +44,15 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython',
     ],
 
-    py_modules=['uipcalc'],
-    entry_points={'console_scripts': ['uipcalc = uipcalc:main']},
-    test_suite='test_uipcalc',
+    packages=find_packages(exclude=['tests']),
+    entry_points={
+        'console_scripts': [
+            'uipcalc = uipcalc:main',
+        ],
+    },
 
     install_requires=install_requires,
-    test_requirements=test_requirements,
+
+    tests_require=tests_require,
+    test_suite='nose.collector',
 )

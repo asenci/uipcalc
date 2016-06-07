@@ -71,7 +71,6 @@ addresses = [
 ]
 
 
-# noinspection PyDocstring
 def test_address_to_bin(a, ra, rm):
     # noinspection PyDocstring
     def test(self):
