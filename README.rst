@@ -85,8 +85,7 @@ Examples:
 Requirements:
 -------------
 
-- Python >= 2.6
-- argparse (for Python < 2.7)
+- Python 2 >= 2.7 or Python 3 >= 3.4
 - ipaddress (for Python < 3.3)
 - six
 
