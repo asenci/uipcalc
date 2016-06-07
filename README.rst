@@ -94,4 +94,4 @@ License:
 
 Licensed under ISC license.
 
-See `LICENSE <http://bitbucket.org/asenci/uipcalc/raw/master/LICENSE>`_ file for details.
+See `LICENSE.txt <http://bitbucket.org/asenci/uipcalc/raw/master/LICENSE.txt>`_ file for details.
