@@ -48,7 +48,7 @@ setup(
         ],
     },
 
-    install_requires=['six'],
+    install_requires=['clint', 'six'],
     extras_require={
         ':python_version<"3.3"': ['ipaddress'],
         'testing': tests_require
