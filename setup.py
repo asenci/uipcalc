@@ -20,7 +20,7 @@ setup(
     url='https://bitbucket.org/asenci/uipcalc/',
     download_url='https://pypi.python.org/pypi/uipcalc',
 
-    author='Andre Sencioles Vitorio Oliveira',
+    author='Andre Sencioles',
     author_email='asenci@gmail.com',
     license='ISC License',
 
