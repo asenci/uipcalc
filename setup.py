@@ -1,18 +1,29 @@
+import os
+import codecs
 from setuptools import setup, find_packages
+
+
+def read(*parts):
+    return codecs.open(os.path.join(os.path.abspath(
+        os.path.dirname(__file__)), *parts)).read()
+
+
+tests_require = ['nose', 'tox']
 
 setup(
     name='uipcalc',
     description='Universal (IPv4/IPv6) IP address and netmask calculator',
-    long_description=open('README.rst').read(),
+    long_description=read('README.rst'),
     version='0.3.1',
     author='Andre Sencioles',
     author_email='asenci@gmail.com',
     license='ISC License',
     url='https://bitbucket.org/asenci/uipcalc/',
-    download_url='https://pypi.python.org/pypi/uipcalc',
 
     platforms='any',
+    keywords='ip ipv4 ipv6 net subnet network netmask calc calculator',
     classifiers=[
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         # 'Environment :: Console :: Curses',
         'Intended Audience :: System Administrators',
@@ -30,22 +41,18 @@ setup(
         'Topic :: Utilities',
     ],
 
-    packages=find_packages(),
+    packages=find_packages(exclude=['docs', 'tests']),
     entry_points={
         'console_scripts': [
             'uipcalc = uipcalc:main',
         ],
     },
 
-    install_requires=[
-        'six',
-    ],
+    install_requires=['six'],
     extras_require={
-        ':python_version<"3.3"': ['ipaddress']
+        ':python_version<"3.3"': ['ipaddress'],
+        'testing': tests_require
     },
-    tests_require=[
-        'nose',
-        'tox',
-    ],
+    tests_require=tests_require,
     test_suite='nose.collector',
 )
