@@ -14,7 +14,7 @@ setup(
     name='uipcalc',
     description='Universal (IPv4/IPv6) IP address and netmask calculator',
     long_description=read('README.rst'),
-    version='0.3.1',
+    version='0.3.2',
     author='Andre Sencioles',
     author_email='asenci@gmail.com',
     license='ISC License',
@@ -41,7 +41,7 @@ setup(
         'Topic :: Utilities',
     ],
 
-    packages=find_packages(exclude=['docs', 'tests']),
+    packages=find_packages(),
     entry_points={
         'console_scripts': [
             'uipcalc = uipcalc:main',
