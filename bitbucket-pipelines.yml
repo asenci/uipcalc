@@ -3,7 +3,7 @@ image: themattrix/tox
 pipelines:
   default:
     - step:
-      script:
-        - pip install -U setuptools pip
-        - pip install -U tox
-        - tox
+        script:
+          - pip install -U setuptools pip
+          - pip install -U tox
+          - tox
