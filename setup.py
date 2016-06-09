@@ -8,7 +8,10 @@ def read(*parts):
         os.path.dirname(__file__)), *parts)).read()
 
 
-tests_require = ['nose', 'tox']
+tests_require = [
+    'pytest',
+]
+
 
 setup(
     name='uipcalc',
