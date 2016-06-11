@@ -1,44 +1,7 @@
 import codecs
 import os
-import sys
+
 from setuptools import setup, find_packages
-from setuptools.command.test import test
-
-
-class PyTest(test):
-    user_options = [
-        ('pytest-args=', 'a', "Arguments to pass to py.test"),
-    ]
-
-    def initialize_options(self):
-        super(PyTest, self).initialize_options()
-        self.pytest_args = []
-
-    def run_tests(self):
-        import pytest
-        sys.exit(pytest.main(self.pytest_args))
-
-
-class Tox(test):
-    user_options = [
-        ('tox-args=', 'a', "Arguments to pass to tox"),
-    ]
-
-    def initialize_options(self):
-        super(Tox, self).initialize_options()
-        self.tox_args = []
-
-    def finalize_options(self):
-        super(Tox, self).finalize_options()
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        import tox
-        import shlex
-        if self.tox_args:
-            self.tox_args = shlex.split(self.tox_args)
-        sys.exit(tox.cmdline(args=self.tox_args))
 
 
 def read(*parts):
@@ -59,13 +22,20 @@ install_requires = [
 ]
 
 setup_requires = [
+    'pytest-runner',
     'wheel',
 ]
 
 tests_require = [
     'pytest',
-    'tox',
 ]
+
+extras_require = {
+    'setup': setup_requires,
+    'testing': tests_require,
+
+    ':python_version<"3.3"': ['ipaddress'],
+}
 
 
 setup(
@@ -83,12 +53,11 @@ setup(
     platforms='any',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
-        'Environment :: Console',
-        'Environment :: Console :: Curses',
         'Intended Audience :: System Administrators',
         'License :: OSI Approved :: ISC License (ISCL)',
-        'Natural Language :: English',
-        'Operating System :: OS Independent',
+        'Operating System :: POSIX',
+        'Operating System :: Microsoft :: Windows',
+        'Operating System :: MacOS :: MacOS X',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
@@ -108,15 +77,7 @@ setup(
     },
 
     install_requires=install_requires,
-    extras_require={
-        ':python_version<"3.3"': ['ipaddress'],
-        'setup': setup_requires,
-        'testing': tests_require,
-    },
+    extras_require=extras_require,
     setup_requires=setup_requires,
     tests_require=tests_require,
-    cmdclass={
-        'pytest': PyTest,
-        'tox': Tox,
-    },
 )
