@@ -1,5 +1,0 @@
-include LICENSE.txt
-#include CHANGES.txt
-include README.rst
-
-prune tests

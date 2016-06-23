@@ -3,18 +3,7 @@ import os
 
 from setuptools import setup, find_packages
 
-
-def read(*parts):
-    here = os.path.abspath(os.path.dirname(__file__))
-    with codecs.open(os.path.join(here, *parts)) as file:
-        return file.read()
-
-
 NAME = 'uipcalc'
-DESCRIPTION = 'Universal (IPv4/IPv6) IP address and netmask calculator'
-KEYWORDS = 'ip ipv4 ipv6 net subnet network netmask calc calculator'
-VERSION = '0.4'
-
 
 install_requires = [
     'clint',
@@ -23,6 +12,7 @@ install_requires = [
 
 setup_requires = [
     'pytest-runner',
+    'setuptools-git',
     'wheel',
 ]
 
@@ -38,12 +28,28 @@ extras_require = {
 }
 
 
+def read(*parts):
+    here = os.path.abspath(os.path.dirname(__file__))
+    with codecs.open(os.path.join(here, *parts)) as file:
+        return file.read()
+
+
+def about(attr):
+    about_file = '{}/about.py'.format(NAME)
+    content = read(about_file)
+
+    runtime_globals = runtime_locals = {}
+    # noinspection PyCompatibility
+    exec(content, runtime_globals, runtime_locals)
+
+    return runtime_globals.get('__{}__'.format(attr), '')
+
+
 setup(
     name=NAME,
-    description=DESCRIPTION,
+    description=about('description'),
     long_description=read('README.rst'),
-    keywords=KEYWORDS,
-    version=VERSION,
+    version=about('version'),
 
     author='Andre Sencioles',
     author_email='asenci@gmail.com',
@@ -68,11 +74,13 @@ setup(
         'Topic :: System :: Networking',
         'Topic :: Utilities',
     ],
+    keywords='ip ipv4 ipv6 net subnet network netmask calc calculator',
 
     packages=find_packages(),
+    include_package_data=True,
     entry_points={
         'console_scripts': [
-            'uipcalc = uipcalc:main',
+            '{} = {}:main.run'.format(NAME, NAME),
         ],
     },
 
