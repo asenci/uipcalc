@@ -1,8 +1,9 @@
 import argparse
-# noinspection PyCompatibility
 import ipaddress
 
 from uipcalc import __description__
+from six import u
+
 from uipcalc.utils import analise_interface
 
 
@@ -18,7 +19,7 @@ def run(args=None):
     args = arg_parser.parse_args(args=args)
 
     try:
-        interface = ipaddress.ip_interface(args.address)
+        interface = ipaddress.ip_interface(u(args.address))
 
     except ValueError as e:
         return arg_parser.error(str(e))
