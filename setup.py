@@ -14,7 +14,7 @@ setup(
     name='uipcalc',
     description='Universal (IPv4/IPv6) IP address and netmask calculator',
     long_description=read('README.rst'),
-    version='0.3.2',
+    version='0.3.3',
     author='Andre Sencioles',
     author_email='asenci@gmail.com',
     license='ISC License',
