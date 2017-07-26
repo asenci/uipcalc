@@ -16,6 +16,8 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 """
 
+from __future__ import print_function
+
 import argparse
 import ipaddress
 import six
@@ -34,7 +36,7 @@ def address_to_bin(address, split=None):
     """
 
     if isinstance(address, six.string_types):
-        address = ipaddress.ip_address(address)
+        address = ipaddress.ip_address(six.u(address))
 
     if address.version == 4:
         bits_total = 32
@@ -68,7 +70,7 @@ def main(argv=None):
     args = parser.parse_args(args=argv)
 
     try:
-        interface = ipaddress.ip_interface(args.address)
+        interface = ipaddress.ip_interface(six.u(args.address))
 
     except ValueError as e:
         return parser.error(str(e))
