@@ -1,52 +1,34 @@
-import codecs
-import os
+from __future__ import absolute_import, print_function
 
+import io
+
+from glob import glob
+from os.path import basename
+from os.path import dirname
+from os.path import join
+from os.path import splitext
 from setuptools import setup, find_packages
 
-NAME = 'uipcalc'
 
-install_requires = [
-    'clint',
-    'six',
-]
-
-setup_requires = [
-    'pytest-runner',
-    'setuptools-git',
-    'wheel',
-]
-
-tests_require = [
-    'pytest',
-]
-
-extras_require = {
-    'setup': setup_requires,
-    'testing': tests_require,
-
-    ':python_version<"3.3"': ['ipaddress'],
-}
+PKG_NAME = 'uipcalc'
 
 
-def read(*parts):
-    here = os.path.abspath(os.path.dirname(__file__))
-    with codecs.open(os.path.join(here, *parts)) as file:
-        return file.read()
+def read(*names, **kwargs):
+    return io.open(
+        join(dirname(__file__), *names),
+        encoding=kwargs.get('encoding', 'utf8')
+    ).read()
 
 
 def about(attr):
-    about_file = '{}/about.py'.format(NAME)
-    content = read(about_file)
+    _globals = {}
+    exec(read(join(dirname(__file__), 'src', PKG_NAME, 'about.py')), _globals)
 
-    runtime_globals = runtime_locals = {}
-    # noinspection PyCompatibility
-    exec(content, runtime_globals, runtime_locals)
-
-    return runtime_globals.get('__{}__'.format(attr), '')
+    return _globals.get('__{}__'.format(attr), '')
 
 
 setup(
-    name=NAME,
+    name=PKG_NAME,
     description=about('description'),
     long_description=read('README.rst'),
     version=about('version'),
@@ -54,7 +36,7 @@ setup(
     author='Andre Sencioles',
     author_email='asenci@gmail.com',
     license='ISC License',
-    url='https://bitbucket.org/asenci/{}/'.format(NAME),
+    url='https://bitbucket.org/asenci/{}/'.format(PKG_NAME),
 
     platforms='any',
     classifiers=[
@@ -77,16 +59,30 @@ setup(
     ],
     keywords='ip ipv4 ipv6 net subnet network netmask calc calculator',
 
-    packages=find_packages(),
+    package_dir={'': 'src'},
+    packages=find_packages(where='src', exclude=['tests', 'tests.*']),
+    py_modules=[splitext(basename(i))[0] for i in glob(join('src', '*.py'))],
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            '{} = {}:main.run'.format(NAME, NAME),
+            '{} = {}:main.run'.format(PKG_NAME, PKG_NAME),
         ],
     },
 
-    install_requires=install_requires,
-    extras_require=extras_require,
-    setup_requires=setup_requires,
-    tests_require=tests_require,
+    install_requires=[
+        'clint',
+        'six',
+    ],
+    extras_require={
+        'setup': [
+            'wheel',
+        ],
+
+        'testing': [
+            'pytest',
+            'tox',
+        ],
+
+        ':python_version<"3.3"': ['ipaddress'],
+    },
 )
