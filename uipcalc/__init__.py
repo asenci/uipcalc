@@ -1,6 +1,2 @@
-from uipcalc.about import __description__, __version__
-from uipcalc.main import run
+from uipcalc.about import __version__
 
-if __name__ == '__main__':
-    import sys
-    sys.exit(run())

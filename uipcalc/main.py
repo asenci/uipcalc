@@ -1,9 +1,9 @@
 import argparse
 import ipaddress
 
-from uipcalc import __description__
 from six import u
 
+from uipcalc.about import __description__
 from uipcalc.utils import analise_interface
 
 
