@@ -1,0 +1,6 @@
+recursive-include docs *.rst
+recursive-include src *.py
+recursive-include tests *.py
+
+prune docs/_build
+
