@@ -18,7 +18,7 @@ setup(
     author='Andre Sencioles',
     author_email='asenci@gmail.com',
     license='ISC License',
-    url='https://bitbucket.org/asenci/uipcalc/',
+    url='https://github.com/asenci/uipcalc/',
 
     platforms='any',
     keywords='ip ipv4 ipv6 net subnet network netmask calc calculator',
